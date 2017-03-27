@@ -7,6 +7,10 @@ while($row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
 	$rows[$row['order_id']]['location_from']=$row['order_from_loc'];
 	$rows[$row['order_id']]['order_id']=$row['order_id'];
 }
+
+if(isset($_GET['pav'])){
+echo "<input type='hidden' id='pavadinimas' value='{$_GET['pav']}'>";
+}
 ?>
 
 
@@ -16,8 +20,8 @@ while($row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Darbas</title>
-
+<title>Priimtas užsakymas</title>
+<link href="css/style.css" rel="stylesheet">
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,27 +31,7 @@ while($row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-<style type="text/css">
-  #map {
-  position: absolute;
-        height: 600px;
-        width: 100%;
-        z-index:0;
-       }
-       #background-White{
-       background-color:white;
-       z-index: 1;
-       border:1px solid black;
-       position:relative;
-       }
-          #background-White1{
-       background-color:white;
-       z-index: 1;
-       border:1px solid black;
-     
-      
-       }
-</style>
+
 </head>
 <body>
 
@@ -90,34 +74,29 @@ while($row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
 
 			<!-- item -->
 			<div class="col-md-12 ">
-				<div id="map"></div>
+				<div id="direction"></div>
 				<!-- kreditai ir reitingai -->
-				<div id="background-White" class="background-White col-md-2">
+			<div id="x">	
+				<div id="background-White1" class=" col-md-4 fontsize">
 					<p>
-						Kreditai: <b>phpkodas</b>
+						<b>Užsakymas: adresas</b>
 					</p>
-					<p>
-						Reitingas - <b>phpkodas</b>
-					</p>
+					<p>Atvykti turite per: laikas</p>
+					<a href="#" class="btn btn-default">atšaukti</a>
+				</div>
 
+				<div id="comments" class=" col-md-3">
+					<p>
+						Komentaras
+					</p>
+					
 
 				</div>
-				<a href="#" class="btn btn-default">Pertauka</a> <a href="#"
-					class="btn btn-default">Klientas iš gatvės</a>
-	
 			</div>
-<div id="background-White1" class=" col-md-4">
-				<table>
-			<?php foreach ($rows as $orders){?>
-					<tr>
-						<td><?=$orders['location_from']; ?></td>
-						<td><a href="#" class="btn btn-default">IMU</a></td>
-						<td></td>
-					</tr>
-					<?php }?>
-					
-				</table>
-
+			</div>
+			
+			
+	
 			</div>
 			<!-- item -->
 		
@@ -140,13 +119,13 @@ while($row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)){
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>
-	  <script src="js/custom.js" >
+	  <script src="js/custom.js" ></script>
 
-	  </script>
+	 
 	 
 	 
 	   <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX5p59PmIY0dPUMA3lNvBY0Rg-XcLACM4&callback=getLocation">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX5p59PmIY0dPUMA3lNvBY0Rg-XcLACM4&callback=getDirectionsLocation">
     </script>
 	
 	

@@ -1,0 +1,57 @@
+#map, #direction {
+	position: relative;
+	height: 90%;
+	width: 100%;
+	z-index: 0;
+}
+.fontsize{
+	font-size: 2em;
+}
+#background-White {
+	background-color: white;
+	z-index: 1;
+	border: 1px solid black;
+	position: absolute;
+	top:0px;
+
+}
+
+#background-White1 {
+	background-color: white;
+	z-index: 1;
+	border: 1px solid black;
+	position: absolute;
+	bottom: 0px;
+
+}
+#comments{
+	background-color: white;
+	z-index: 1;
+	border: 1px solid black;
+	position: absolute;
+	bottom: 0px;
+	
+}
+#x{
+	display: inline-block;
+}
+#botton1{
+z-index: 1;
+position: absolute;
+top:62px;
+
+}
+#botton2{
+z-index: 1;
+position: absolute;
+bottom:138px;
+
+}
+#botton3{
+z-index: 1;
+position: absolute;
+left: 35%;
+bottom: 40%;
+font-size: 4em;
+display: block;
+}

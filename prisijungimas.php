@@ -4,20 +4,29 @@ include_once 'connect.php';
 
 // 
 //checks if password is correct
-if(isset($_POST['login']) && $_POST['login']=='connect'){
-	$result=sqlsrv_query($conn, "SELECT user_id, user_name, user_pasw FROM dbo.users WHERE [user_name]='{$_POST['name']}'" );
-$row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
 
-if($_POST['name']==$row['user_name'] && $_POST['password']==$row['user_pasw'] && $_POST['name']!="" && $_POST['password']!=""){
-$_SESSION['username']=$row['user_name'];
-$_SESSION['id']=$row['user_id'];
+if(isset($_POST['login']) && $_POST['login']=='connect'){
+	
+	$result=sqlsrv_query($conn, "SELECT [driver_id]	,[driver_pasw]	,[driver_name], [driver_baned] FROM [dbo].[drivers] WHERE [driver_name]='{$_POST['name']}'");
+$row=sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC);
+//chack if baned
+if($row['driver_baned']==3){
+	echo "<script>alert('Vairuotojas uzblokuotas, kreiptis i administratoriu')</script>";
+}else{
+//checking if login and password is correct
+if($_POST['name']==$row['driver_name'] && $_POST['password']==$row['driver_pasw'] && $_POST['name']!="" && $_POST['password']!=""){
+$_SESSION['username']=$row['driver_name'];
+$_SESSION['id']=$row['driver_id'];
 header("Location: darbas.php");
 die();
 }else{
-	echo "<a href='prisijungimas.php'>prisijungti nepavyko</a>";
-	die();
+if($_POST['name']!="" && $_POST['password']!=""){
+	$value=$row['driver_baned']+1;
+	echo $value;
+	sqlsrv_query($conn, "UPDATE [dbo].[drivers] SET [driver_baned] = '$value' WHERE [driver_name] ='{$_POST['name']}'" );
 }
-print_r($row);
+}
+}//check if baned
 }
 sqlsrv_close($conn);
 ?>
